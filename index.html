@@ -378,6 +378,12 @@ body{ margin:0; background:#fff }
 /* a chapter photo fades in on reveal: its grade comes with it, not before it over the empty frame */
 .m .chap figure .frame::before,.m .chap figure .frame::after{ transition:opacity .5s ease }
 .m .chap figure .frame:not(.in)::before,.m .chap figure .frame:not(.in)::after{ opacity:0 }
+/* the same fine grain over the photos that already carry their own tint: the door, the community photo, the dock, the phone philosophy photos */
+.wel-pic .frame{ position:relative; isolation:isolate }
+.wel-pic .frame::after,.comm-pic::before,.cta-water::before,.belief-pic::before{ content:""; position:absolute; inset:0; z-index:1; pointer-events:none; mix-blend-mode:soft-light; opacity:.4; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") }
+.plain .wel-pic .frame::after,.plain .comm-pic::before,.plain .cta-water::before,.plain .belief-pic::before{ display:none }
+.m .wel-pic .frame::after,.m .comm-pic::before{ transition:opacity .5s ease }
+.m .wel-pic .frame:not(.in)::after,.m .comm-pic:not(.in)::before{ opacity:0 }
 .dr-foot{ position:absolute; z-index:2; left:0; right:0; bottom:0; height:var(--foot); background:#fff; transition:transform .75s var(--io),background-color .4s }
 .dr.on .dr-foot{ transform:translateY(calc(100% + calc(44*var(--u)))) }
 .dr-foot b{ position:absolute; left:calc(18*var(--u)); top:50%; transform:translateY(-50%); font:500 clamp(calc(18*var(--u)),calc(1.48*var(--c)),calc(24*var(--u)))/1.04 var(--serif); letter-spacing:-.01em; white-space:nowrap; transition:opacity .3s .5s,color .3s }
