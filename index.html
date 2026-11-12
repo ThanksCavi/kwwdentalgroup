@@ -330,8 +330,6 @@ body{ margin:0; background:#fff }
 /* the reflection crosses the glass once: a moment after the photo has opened and is in full view. It is not tied to scrolling and never repeats. */
 .m .wel-pic .frame.glint .glass::after{ animation:glint 1.7s cubic-bezier(.45,0,.2,1) 1.1s both }
 @keyframes glint{ from{ transform:translateX(-75%) } to{ transform:translateX(75%) } }
-.m .wel-pic .glass{ clip-path:inset(0 0 100% 0); transition:clip-path 1.5s var(--ease) }
-.m .wel-pic .frame.in .glass{ clip-path:inset(0 0 0 0) }
 .wel-pic figcaption{ margin-top:calc(14*var(--u)); font-size:calc(14*var(--u)); color:var(--mut) }
 .wel-pic .seal{ position:absolute; left:calc(var(--seal)*-.5); top:7%; width:var(--seal); height:var(--seal) }
 .wel-pic .seal text{ font-size:16PX }
@@ -435,8 +433,7 @@ body{ margin:0; background:#fff }
 /* arrival on scroll: the three cards rise one after another and each photo is unveiled from the top */
 .m .dr-row .dr{ transition:flex-basis var(--dur) var(--io),opacity .9s calc(var(--i)*.12s),translate 1.3s var(--ease) calc(var(--i)*.12s) }
 .m .dr-row:not(.in) .dr{ opacity:0; translate:0 calc(48*var(--u)) }
-.m .dr-row .dr-img{ transition:transform var(--dur) var(--io),clip-path 1.5s var(--ease) calc(.18s + var(--i)*.12s) }
-.m .dr-row:not(.in) .dr-img{ clip-path:inset(0 0 100% 0) }
+.m .dr-row .dr-img{ transition:transform var(--dur) var(--io) }
 .m .dr-row:not(.in) .dr-foot b,.m .dr-row:not(.in) .dr-plus{ opacity:0 }
 .m .dr-row .dr-plus{ transition:transform .6s var(--ease),background-color .3s,opacity .6s calc(.9s + var(--i)*.12s) }
 
@@ -752,8 +749,6 @@ body{ margin:0; background:#fff }
 .m .kww [data-r]{ opacity:0; transform:translateY(calc(28*var(--u))); transition:opacity .9s,transform 1.2s var(--ease); transition-delay:calc(var(--d,0)*.09s) }
 .m .kww [data-r].in{ opacity:1; transform:none }
 .m .kww [data-r="mask"]{ opacity:1; transform:none }
-.m .kww [data-r="mask"]>img{ clip-path:inset(0 0 100% 0); transition:clip-path 1.5s var(--ease) }
-.m .kww [data-r="mask"].in>img{ clip-path:inset(0 0 0 0) }
 .kww [data-split] .w{ display:inline-block; overflow:hidden; vertical-align:top; padding:.1em .08em .2em; margin:-.1em -.08em -.2em }
 .kww [data-split] .w>span{ display:inline-block }
 .m .kww [data-split] .w>span{ transform:translateY(125%); transition:transform 1.1s var(--ease) calc(var(--i)*.04s) }
@@ -1141,8 +1136,6 @@ body{ margin:0; background:#fff }
   .phil.live .belief h3 button{ cursor:inherit }
   .phil.live .belief-body p{ color:var(--ink); transition:none; font-size:clamp(calc(16.5*var(--u)),calc(1.2*var(--c)),calc(18.5*var(--u))); max-width:calc(640*var(--u)) }
   /* arrival: the frame opens top to bottom like every other photo on the page, the beliefs rise once */
-  .m .phil.live .phil-frame{ clip-path:inset(0 0 100% 0 round var(--rad)); transition:clip-path 1.5s var(--ease) }
-  .m .phil.live .phil-frame.in{ clip-path:inset(0 0 0 0 round var(--rad)) }
   .m .phil.live .phil-count{ opacity:0; transition:opacity .9s .7s }
   .m .phil.live .phil-frame.in+.phil-count{ opacity:1 }
   .m .phil.live .belief{ transition:opacity .7s,transform 1.2s var(--ease) }
@@ -1444,7 +1437,7 @@ body{ margin:0; background:#fff }
     <a class="btn ghost" href="#story" data-r>Our Legacy Story</a>
   </div>
   <figure class="wel-pic">
-    <div class="frame" data-r="mask"><div class="glass"><img src="img/door.jpg" alt="Office door with the names of the three doctors" width="1100" height="1650" loading="lazy" decoding="async"></div></div>
+    <div class="frame" data-r="mask"><div class="glass"><img src="img/door.jpg" alt="Office door with the names of the three doctors" width="1100" height="1650" decoding="async"></div></div>
     <div class="seal" aria-hidden="true">
       <svg viewBox="0 0 200 200"><defs><path id="seal-b" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#seal-b" textLength="497">THREE NAMES · ONE DOOR · ONE FAMILY PRACTICE · </textPath></text></svg>
       <img src="img/icon-ink.png" alt="" width="120" height="141">
@@ -1466,8 +1459,8 @@ body{ margin:0; background:#fff }
     <article class="dr" data-dr="1" style="--i:0;--fx:.52;--fy:.36">
       <div class="dr-card">
         <span class="dr-img">
-          <img src="img/kess-o.jpg" alt="Dr. Lauren Kessinger" width="900" height="1350" loading="lazy" decoding="async">
-          <img class="alt" src="img/kess-b.jpg" alt="" width="900" height="1350" loading="lazy" decoding="async">
+          <img src="img/kess-o.jpg" alt="Dr. Lauren Kessinger" width="900" height="1350" decoding="async">
+          <img class="alt" src="img/kess-b.jpg" alt="" width="900" height="1350" decoding="async">
         </span>
         <span class="dr-foot" aria-hidden="true"><b class="n1">Dr. Lauren Kessinger<small><span>Invisalign</span><span>Implants</span><span>Botox &amp; fillers</span></small></b><b class="n2">Dr. Lauren<br>Kessinger</b><i class="dr-plus"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg></i></span>
         <button class="dr-hit" type="button" aria-expanded="false" aria-controls="dr-p1" aria-label="Dr. Lauren Kessinger — read the story"></button>
@@ -1502,8 +1495,8 @@ body{ margin:0; background:#fff }
     <article class="dr" data-dr="2" style="--i:1;--fx:.47;--fy:.3">
       <div class="dr-card">
         <span class="dr-img">
-          <img src="img/alli-o.jpg" alt="Dr. Alli Wolski" width="900" height="1350" loading="lazy" decoding="async">
-          <img class="alt" src="img/alli-b.jpg" alt="" width="900" height="1350" loading="lazy" decoding="async">
+          <img src="img/alli-o.jpg" alt="Dr. Alli Wolski" width="900" height="1350" decoding="async">
+          <img class="alt" src="img/alli-b.jpg" alt="" width="900" height="1350" decoding="async">
         </span>
         <span class="dr-foot" aria-hidden="true"><b class="n1">Dr. Alli Wolski<small><span>Cosmetic</span><span>Restorative</span><span>Preventive</span></small></b><b class="n2">Dr. Alli<br>Wolski</b><i class="dr-plus"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg></i></span>
         <button class="dr-hit" type="button" aria-expanded="false" aria-controls="dr-p2" aria-label="Dr. Alli Wolski — read the story"></button>
@@ -1538,8 +1531,8 @@ body{ margin:0; background:#fff }
     <article class="dr" data-dr="3" style="--i:2;--fx:.49;--fy:.3">
       <div class="dr-card">
         <span class="dr-img">
-          <img src="img/joe-o.jpg" alt="Dr. Joe Wolski" width="900" height="1350" loading="lazy" decoding="async">
-          <img class="alt" src="img/joe-b.jpg" alt="" width="900" height="1350" loading="lazy" decoding="async">
+          <img src="img/joe-o.jpg" alt="Dr. Joe Wolski" width="900" height="1350" decoding="async">
+          <img class="alt" src="img/joe-b.jpg" alt="" width="900" height="1350" decoding="async">
         </span>
         <span class="dr-foot" aria-hidden="true"><b class="n1">Dr. Joe Wolski<small><span>Restorative</span><span>Dentures</span><span>Full-arch implants</span></small></b><b class="n2">Dr. Joe<br>Wolski</b><i class="dr-plus"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg></i></span>
         <button class="dr-hit" type="button" aria-expanded="false" aria-controls="dr-p3" aria-label="Dr. Joe Wolski — read the story"></button>
@@ -1625,9 +1618,9 @@ body{ margin:0; background:#fff }
 <path class="ring c2 ring-now ring-5" pathLength="1" style="--a:0.780;--n:7.69;--am:0.78;--nm:7.69" d="M300,9.2C321.5,9.7 343,14.7 364,19.5S406.3,29.7 426,38.4S465.3,58.3 481.9,71.9S513.4,102.5 525.8,120S548,157.1 556.3,176.6S570.8,216.5 575.7,237.1S584.8,278.8 585.8,300S586,343.3 582,364.4S571.9,407.3 562.2,426.2S537.6,462.2 523.4,478.1S493.5,508.7 476.9,521.8S442.4,546.6 423.7,556.8S385.3,577.7 364.7,583.4S321.5,591.3 300,591.2S256.2,588.3 235.4,582.8S194.6,568.3 175.4,558.8S137.2,538.6 119.9,525.8S85.7,498.5 71.9,481.9S45.8,446.3 37,426.7S22.6,385.2 19.2,364.1S15.3,321.2 16.2,300S20,257.7 24.6,237.1S34.9,195.7 43.7,176.6S64.7,139.5 77.5,122.5S104.5,89 120.6,75.1S155.2,48.8 174.3,39.1S214.3,21.5 235.3,16.5S278.5,8.7 300,9.2"/>
         </svg>
         <div class="rings-core">
-          <img src="img/founders.jpg" alt="" width="800" height="800" loading="lazy" decoding="async">
-          <img src="img/family.jpg" alt="" width="800" height="800" loading="lazy" decoding="async">
-          <img src="img/trio.jpg" alt="" width="1100" height="1650" loading="lazy" decoding="async" style="object-position:50% 20%">
+          <img src="img/founders.jpg" alt="" width="800" height="800" decoding="async">
+          <img src="img/family.jpg" alt="" width="800" height="800" decoding="async">
+          <img src="img/trio.jpg" alt="" width="1100" height="1650" decoding="async" style="object-position:50% 20%">
         </div>
         <span class="rings-tag" style="left:69.7%;top:37.2%;--a:.12">1987</span>
         <span class="rings-tag" style="left:80.3%;top:39.0%;--a:.38">2020</span>
@@ -1641,23 +1634,23 @@ body{ margin:0; background:#fff }
         <p class="eyebrow">Chapter one · 1987</p>
         <h3>The Beginning</h3>
         <p>What started in 1987 with a husband-and-wife team, Dr. Pinzl and Dr. Liesen, grew into a practice rooted in the community and built on relationships. Family and community have always been the heart and soul of LPK Dental.</p>
-        <figure><div class="frame" data-r="mask"><img src="img/dawn.jpg" alt="Morning light over a Northwoods forest and footbridge" width="1800" height="1200" loading="lazy" decoding="async"></div><figcaption>The Northwoods, where it all started.</figcaption></figure>
+        <figure><div class="frame" data-r="mask"><img src="img/dawn.jpg" alt="Morning light over a Northwoods forest and footbridge" width="1800" height="1200" decoding="async"></div><figcaption>The Northwoods, where it all started.</figcaption></figure>
       </article>
       <article class="chap">
         <p class="eyebrow">Chapter two · 2020</p>
         <h3>Growth Over Time</h3>
         <p>In 2020, their daughter Dr. Lauren Kessinger came home to Wisconsin to join her parents at LPK — carrying the family practice into its next generation, for the families who had trusted it for decades.</p>
-        <figure><div class="frame" data-r="mask"><img src="img/explain.jpg" alt="A doctor walks a patient through their scan on screen" width="1400" height="933" loading="lazy" decoding="async"></div><figcaption>Taking the time to explain.</figcaption></figure>
+        <figure><div class="frame" data-r="mask"><img src="img/explain.jpg" alt="A doctor walks a patient through their scan on screen" width="1400" height="933" decoding="async"></div><figcaption>Taking the time to explain.</figcaption></figure>
       </article>
       <article class="chap">
         <p class="eyebrow">Chapter three · Today</p>
         <h3>The New Partnership</h3>
         <p>Kessinger, Wolski &amp; Wolski was built on a shared vision: combining trusted relationships, personalized care, and modern dentistry while preserving the small-town values patients know and love. After years of building successful private practices and longstanding ties to the Northwoods community, the doctors are excited to join forces to create one collaborative team focused on exceptional patient care.</p>
-        <figure><div class="frame" data-r="mask"><img src="img/hall.jpg" alt="The doctors talking in the office hallway" width="1100" height="1650" loading="lazy" decoding="async" style="object-position:50% 30%"></div><figcaption>Same hallway. One more reason to&nbsp;smile.</figcaption></figure>
+        <figure><div class="frame" data-r="mask"><img src="img/hall.jpg" alt="The doctors talking in the office hallway" width="1100" height="1650" decoding="async" style="object-position:50% 30%"></div><figcaption>Same hallway. One more reason to&nbsp;smile.</figcaption></figure>
       </article>
     </div>
   </div>
-  <img class="story-ic" src="img/icon-sage.png" alt="" width="120" height="141" loading="lazy" decoding="async">
+  <img class="story-ic" src="img/icon-sage.png" alt="" width="120" height="141" decoding="async">
   <blockquote class="story-q" data-split>“This isn’t a corporate transition. It’s an intentional continuation of care.”</blockquote>
 </section>
 
@@ -1674,11 +1667,11 @@ body{ margin:0; background:#fff }
   <div class="phil-grid">
     <div class="phil-vis">
       <div class="phil-frame" aria-hidden="true">
-        <div class="phil-ph on"><img src="img/shade.jpg" alt="" width="1500" height="1000" loading="lazy" decoding="async" style="object-position:46% 50%"></div>
-        <div class="phil-ph"><img src="img/care.jpg" alt="" width="1400" height="933" loading="lazy" decoding="async" style="object-position:62% 50%"></div>
-        <div class="phil-ph"><img src="img/laugh.jpg" alt="" width="1400" height="933" loading="lazy" decoding="async" style="object-position:70% 50%"></div>
-        <div class="phil-ph"><img src="img/town.jpg" alt="" width="1400" height="2101" loading="lazy" decoding="async" style="object-position:50% 42%"></div>
-        <div class="phil-ph"><img src="img/scan.jpg" alt="" width="1100" height="1650" loading="lazy" decoding="async" style="object-position:50% 34%"></div>
+        <div class="phil-ph on"><img src="img/shade.jpg" alt="" width="1500" height="1000" decoding="async" style="object-position:46% 50%"></div>
+        <div class="phil-ph"><img src="img/care.jpg" alt="" width="1400" height="933" decoding="async" style="object-position:62% 50%"></div>
+        <div class="phil-ph"><img src="img/laugh.jpg" alt="" width="1400" height="933" decoding="async" style="object-position:70% 50%"></div>
+        <div class="phil-ph"><img src="img/town.jpg" alt="" width="1400" height="2101" decoding="async" style="object-position:50% 42%"></div>
+        <div class="phil-ph"><img src="img/scan.jpg" alt="" width="1100" height="1650" decoding="async" style="object-position:50% 34%"></div>
       </div>
       <p class="phil-count" aria-hidden="true"><b><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span></b>/ 05 — what we believe</p>
     </div>
@@ -1687,27 +1680,27 @@ body{ margin:0; background:#fff }
       <article class="belief on" data-belief="1">
         <span class="n">01</span>
         <h3><button type="button">Clinical Artistry over Assembly&nbsp;Lines<i aria-hidden="true"></i></button></h3>
-        <div class="belief-body"><div class="belief-in"><figure class="belief-pic"><img src="img/shade.jpg" alt="A gloved hand holds a shade guide to match the colour of a tooth" width="1500" height="1000" loading="lazy" decoding="async" style="object-position:46% 50%"></figure><p>We believe every smile is a unique canvas deserving of individualized care and attention. Rather than rushing through a high volume of patients, we intentionally reserve ample time for each appointment so we can focus on the meticulous details that define true clinical excellence. We invest in the highest quality materials and the most advanced technology available because we believe exceptional dentistry starts with doing things the right way: thoughtfully, precisely, and built to last.</p></div></div>
+        <div class="belief-body"><div class="belief-in"><figure class="belief-pic"><img src="img/shade.jpg" alt="A gloved hand holds a shade guide to match the colour of a tooth" width="1500" height="1000" decoding="async" style="object-position:46% 50%"></figure><p>We believe every smile is a unique canvas deserving of individualized care and attention. Rather than rushing through a high volume of patients, we intentionally reserve ample time for each appointment so we can focus on the meticulous details that define true clinical excellence. We invest in the highest quality materials and the most advanced technology available because we believe exceptional dentistry starts with doing things the right way: thoughtfully, precisely, and built to last.</p></div></div>
       </article>
       <article class="belief" data-belief="2">
         <span class="n">02</span>
         <h3><button type="button">Bespoke Care, Designed Around&nbsp;You<i aria-hidden="true"></i></button></h3>
-        <div class="belief-body"><div class="belief-in"><figure class="belief-pic"><img src="img/care.jpg" alt="A doctor talks with a patient, chairside" width="1400" height="933" loading="lazy" decoding="async" style="object-position:62% 50%"></figure><p>We believe dentistry should never feel rushed or one-size-fits-all. Every patient has unique goals, concerns, and experiences, which is why we take the time to truly listen, educate, and create personalized treatment plans tailored specifically to you. Your care is a collaboration built on trust, comfort, and helping you feel confident in every decision we make together.</p></div></div>
+        <div class="belief-body"><div class="belief-in"><figure class="belief-pic"><img src="img/care.jpg" alt="A doctor talks with a patient, chairside" width="1400" height="933" decoding="async" style="object-position:62% 50%"></figure><p>We believe dentistry should never feel rushed or one-size-fits-all. Every patient has unique goals, concerns, and experiences, which is why we take the time to truly listen, educate, and create personalized treatment plans tailored specifically to you. Your care is a collaboration built on trust, comfort, and helping you feel confident in every decision we make together.</p></div></div>
       </article>
       <article class="belief" data-belief="3">
         <span class="n">03</span>
         <h3><button type="button">Radical Loyalty &amp;&nbsp;Integrity<i aria-hidden="true"></i></button></h3>
-        <div class="belief-body"><div class="belief-in"><figure class="belief-pic"><img src="img/laugh.jpg" alt="A patient smiles in the chair" width="1400" height="933" loading="lazy" decoding="async" style="object-position:70% 50%"></figure><p>We believe trust is earned through honesty, consistency, and putting people first. Our commitment to patients extends far beyond a single appointment — we strive to be a dependable, long-term partner in your oral health journey. Every recommendation we make is guided by what is truly best for your health, because preserving your trust will always matter more than simply treating another case.</p></div></div>
+        <div class="belief-body"><div class="belief-in"><figure class="belief-pic"><img src="img/laugh.jpg" alt="A patient smiles in the chair" width="1400" height="933" decoding="async" style="object-position:70% 50%"></figure><p>We believe trust is earned through honesty, consistency, and putting people first. Our commitment to patients extends far beyond a single appointment — we strive to be a dependable, long-term partner in your oral health journey. Every recommendation we make is guided by what is truly best for your health, because preserving your trust will always matter more than simply treating another case.</p></div></div>
       </article>
       <article class="belief" data-belief="4">
         <span class="n">04</span>
         <h3><button type="button">Community-Rooted Service<i aria-hidden="true"></i></button></h3>
-        <div class="belief-body"><div class="belief-in"><figure class="belief-pic"><img src="img/town.jpg" alt="A Northwoods main street with a flag and flower baskets" width="1400" height="2101" loading="lazy" decoding="async" style="object-position:50% 42%"></figure><p>We believe great dentistry begins with strong community connections. Our practice is deeply rooted in the communities we serve, and we are committed to giving back through local involvement, meaningful relationships, and caring for generations of families. We measure success by the health of our patients and the strength of the communities we serve.</p></div></div>
+        <div class="belief-body"><div class="belief-in"><figure class="belief-pic"><img src="img/town.jpg" alt="A Northwoods main street with a flag and flower baskets" width="1400" height="2101" decoding="async" style="object-position:50% 42%"></figure><p>We believe great dentistry begins with strong community connections. Our practice is deeply rooted in the communities we serve, and we are committed to giving back through local involvement, meaningful relationships, and caring for generations of families. We measure success by the health of our patients and the strength of the communities we serve.</p></div></div>
       </article>
       <article class="belief" data-belief="5">
         <span class="n">05</span>
         <h3><button type="button">Compassionate Innovation<i aria-hidden="true"></i></button></h3>
-        <div class="belief-body"><div class="belief-in"><figure class="belief-pic"><img src="img/scan.jpg" alt="A doctor smiles beside the digital scanner" width="1100" height="1650" loading="lazy" decoding="async" style="object-position:50% 30%"></figure><p>We believe technology should enhance the human side of dentistry, not replace it. Every advancement we incorporate into our practice is thoughtfully chosen to make treatment more comfortable, more efficient, and more predictable — while helping us deliver a higher level of personalized care for every patient.</p></div></div>
+        <div class="belief-body"><div class="belief-in"><figure class="belief-pic"><img src="img/scan.jpg" alt="A doctor smiles beside the digital scanner" width="1100" height="1650" decoding="async" style="object-position:50% 30%"></figure><p>We believe technology should enhance the human side of dentistry, not replace it. Every advancement we incorporate into our practice is thoughtfully chosen to make treatment more comfortable, more efficient, and more predictable — while helping us deliver a higher level of personalized care for every patient.</p></div></div>
       </article>
     </div>
   </div>
@@ -1727,7 +1720,7 @@ body{ margin:0; background:#fff }
   <div class="comm-grid">
     <figure class="comm-fig">
       <div class="comm-pic" data-r="mask"><!-- source: Spec/client_assets/Updated Photos 8.11.26/Action Photos/7U8A7337.jpg, full frame 2048x1365 (img/kids.jpg was a tighter crop of the same shot) -->
-        <img src="img/kids-wide.jpg" alt="Three young patients smiling and holding their toothbrushes" width="2048" height="1365" loading="lazy" decoding="async"></div>
+        <img src="img/kids-wide.jpg" alt="Three young patients smiling and holding their toothbrushes" width="2048" height="1365" decoding="async"></div>
     </figure>
     <!-- Stand-in for the Trustindex widget (slider with a header): the ti-* classes and the order of blocks inside a card follow the plugin's markup, so the look is one stylesheet away. Static sample of the client's Google reviews; live on the site. -->
     <div class="rv ti-widget">
@@ -1794,7 +1787,7 @@ body{ margin:0; background:#fff }
   <figure class="cta-pic" data-r="mask">
     <i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>
     <div class="cta-water"><div>
-      <img src="img/dock.jpg" alt="A wooden dock reaching out over a calm Northwoods lake" width="1200" height="1800" loading="lazy" decoding="async">
+      <img src="img/dock.jpg" alt="A wooden dock reaching out over a calm Northwoods lake" width="1200" height="1800" decoding="async">
       <canvas aria-hidden="true" data-mask="img/dock-mask.jpg"></canvas>
     </div></div>
   </figure>
@@ -1862,9 +1855,9 @@ body{ margin:0; background:#fff }
         <div class="map-zoom"><button class="map-b" type="button" data-map-zoom="1" aria-label="Zoom in"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg></button><button class="map-b" type="button" data-map-zoom="-1" aria-label="Zoom out"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 8h12"/></svg></button></div>
       </div>
       <div class="map-card">
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=277+North+4th+Avenue+Park+Falls+WI+54552" target="_blank" rel="noopener" aria-label="Park Falls office, 277 North 4th Avenue — open in Google Maps" title="Open in Google Maps"><span class="ph"><img src="img/pf-office.jpg" alt="Park Falls office treatment room" width="1200" height="800" loading="lazy" decoding="async"></span><span class="mc-t"><b>Park Falls office</b><small>277 North 4th Avenue</small></span><i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></i></a>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=240+Oak+St+Woodruff+WI+54568" target="_blank" rel="noopener" aria-label="Woodruff office, 240 Oak St. — open in Google Maps" title="Open in Google Maps"><span class="ph"><img src="img/wd-front.jpg" alt="Woodruff office exterior" width="1400" height="933" loading="lazy" decoding="async"></span><span class="mc-t"><b>Woodruff office</b><small>240 Oak St.</small></span><i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></i></a>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=5973+County+Hwy+W+Manitowish+Waters+WI+54545" target="_blank" rel="noopener" aria-label="Manitowish Waters office, 5973 County Hwy. W — open in Google Maps" title="Open in Google Maps"><span class="ph"><img src="img/mw-front.jpg" alt="Manitowish Waters office exterior" width="1400" height="933" loading="lazy" decoding="async"></span><span class="mc-t"><b>Manitowish Waters office</b><small>5973 County Hwy. W</small></span><i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></i></a>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=277+North+4th+Avenue+Park+Falls+WI+54552" target="_blank" rel="noopener" aria-label="Park Falls office, 277 North 4th Avenue — open in Google Maps" title="Open in Google Maps"><span class="ph"><img src="img/pf-office.jpg" alt="Park Falls office treatment room" width="1200" height="800" decoding="async"></span><span class="mc-t"><b>Park Falls office</b><small>277 North 4th Avenue</small></span><i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></i></a>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=240+Oak+St+Woodruff+WI+54568" target="_blank" rel="noopener" aria-label="Woodruff office, 240 Oak St. — open in Google Maps" title="Open in Google Maps"><span class="ph"><img src="img/wd-front.jpg" alt="Woodruff office exterior" width="1400" height="933" decoding="async"></span><span class="mc-t"><b>Woodruff office</b><small>240 Oak St.</small></span><i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></i></a>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=5973+County+Hwy+W+Manitowish+Waters+WI+54545" target="_blank" rel="noopener" aria-label="Manitowish Waters office, 5973 County Hwy. W — open in Google Maps" title="Open in Google Maps"><span class="ph"><img src="img/mw-front.jpg" alt="Manitowish Waters office exterior" width="1400" height="933" decoding="async"></span><span class="mc-t"><b>Manitowish Waters office</b><small>5973 County Hwy. W</small></span><i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h12M9 3l5 5-5 5"/></svg></i></a>
       </div>
       <p class="map-cr"><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a></p>
     </div>
