@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ffffff">
 <base href="../../index.html">
 <meta name="robots" content="noindex, nofollow">
 <title>General &amp; Family Dentistry — coming soon — Kessinger, Wolski &amp; Wolski Dental Group</title>
@@ -118,6 +119,10 @@ footer{ padding-top:22px; padding-bottom:26px; border-top:1px solid var(--line);
   main{ grid-template-columns:1fr; align-content:center; gap:36px; padding-top:12px }
   figure{ order:-1; width:min(100%,300px) }
   .arch{ aspect-ratio:1/1 }
+  /* one column: the copy sits on the same centre line as the arch; the eyebrow gets a dash on each side so it stays symmetric */
+  main>div{ text-align:center }
+  .eyebrow,.act{ justify-content:center }
+  .eyebrow::after{ content:""; width:30px; height:1px; flex:none; background:currentColor }
 }
 @media (max-width:479px){
   header{ height:72px }

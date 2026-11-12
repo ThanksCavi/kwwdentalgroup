@@ -21,6 +21,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#F7F5EF">
 <title>Kessinger, Wolski &amp; Wolski Dental Group — Northwoods dentists</title>
 <meta name="description" content="Design prototype of the Kessinger, Wolski &amp; Wolski Dental Group homepage.">
 <script>if(!/[?&]static/.test(location.search)&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('m')</script>
@@ -86,7 +87,9 @@ html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; color-scheme:light; 
   --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 @supports (height:1svh){ :root{ --vh:1svh } }
+html{ background:var(--paper) }   /* the canvas round the page (overscroll, the strip Safari tints from the page) is the hero's paper, not white */
 body{ margin:0; background:#fff }
+.snap,.snap *{ transition:none !important }   /* page.js: an accordion item above the tapped one folds in the same frame (no shake on iOS) */
 
 .kww{ container:kww / inline-size; --p:0; position:relative; overflow-x:clip; background:#fff; color:var(--ink);
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility }
@@ -99,7 +102,8 @@ body{ margin:0; background:#fff }
 :where(.kww a){ color:inherit }
 .kww :focus-visible{ outline:calc(3*var(--u)) solid var(--pine-d); outline-offset:calc(3*var(--u)) }   /* the ring follows the element's own shape; flat things get a soft 6 px corner from base.css */
 .kww :is(.off-btn,.belief h3 button):focus-visible{ border-radius:calc(6*var(--u)) }   /* these two are reset with all:unset, which beats the soft default */
-.kww :is(main,section,.vf-done)[tabindex="-1"]:focus-visible{ outline:0 }   /* a glide's target takes focus without a frame */
+.kww :is(main,section,.vf-done,#visit-form,#office-list)[tabindex="-1"]:focus-visible{ outline:0 }   /* a glide's target takes focus without a frame */
+#visit-form,#office-list{ scroll-margin-top:calc(84*var(--u)) }   /* the dock (phones, tablets) leads straight to the form and to the phone numbers, clear of the sticky header */
 
 :where(.kww h1,.kww h2,.kww h3){ font-family:var(--serif); font-weight:500; letter-spacing:-.012em }
 :where(.kww h2){ font-size:clamp(calc(40*var(--u)),calc(4.5*var(--c)),calc(78*var(--u))); line-height:1.02; letter-spacing:-.016em; text-wrap:balance }
@@ -899,7 +903,7 @@ h2.eyebrow{ letter-spacing:normal; text-wrap:wrap }   /* the Services label is a
   .hero-sub span{ display:inline }
   .hero-cta .btn{ width:100%; justify-content:space-between }
   .hero-media{ position:relative; order:2; inset:auto; height:calc(var(--vh)*48); min-height:calc(330*var(--u)); margin-top:calc(28*var(--u)); clip-path:none; border-radius:calc(46*var(--c)) calc(46*var(--c)) calc(22*var(--u)) calc(22*var(--u)) }
-  .hero-media img{ object-position:50% 30%; transform-origin:50% 30%; transform:scale(calc(1.24 - var(--p)*.36)) }
+  .hero-media img{ object-position:50% 30%; transform-origin:50% 30%; transform:scale(calc(1 + (1 - var(--p))*.44)) }   /* 1.24 at the top of the page (--p ≈ .45) down to 1 as it leaves, never below: the photo always fills its arch */
   .hero-cue{ display:none }
   .hero-cap{ position:static; order:3; margin-top:calc(12*var(--u)); opacity:1 }
 
@@ -1184,7 +1188,7 @@ h2.eyebrow{ letter-spacing:normal; text-wrap:wrap }   /* the Services label is a
    The photo takes two thirds of the medallion, so faces stay readable; the seven outer rings tell the same story (--am/--nm, rings.py). */
 @container kww (max-width:699px){
   .story-grid{ grid-template-columns:minmax(0,1fr); gap:0 }
-  .rings{ --fig:clamp(calc(100*var(--u)),calc(var(--vh)*15),calc(132*var(--u))); --told:.9; top:calc(64*var(--u)); z-index:5; height:calc(var(--fig) + calc(28*var(--u))); min-height:0; margin:0 calc(-20*var(--u)); padding:0 calc(20*var(--u)); display:flex; align-items:center; background:var(--ink); box-shadow:0 calc(1*var(--u)) 0 var(--line) }
+  .rings{ --fig:clamp(calc(100*var(--u)),calc(var(--vh)*15),calc(132*var(--u))); --told:.9; top:calc(62*var(--u)); z-index:5; height:calc(var(--fig) + calc(28*var(--u))); min-height:0; margin:0 calc(-20*var(--u)); padding:0 calc(20*var(--u)); display:flex; align-items:center; background:var(--ink); box-shadow:0 calc(1*var(--u)) 0 var(--line),inset 0 calc(1*var(--u)) 0 var(--line) }   /* right under the solid header bar (62 px): no gap for the text to show through; the same hairline above and below */
   .rings-fig{ flex:none; margin-bottom:0 }
   .rings-fig::before,.ring:not(.ring-5),.ring-g:not(.ring-5),.rings-tag,.m .rings-tick{ display:none }
   .rings-core{ inset:17.5% }
@@ -1901,7 +1905,7 @@ h2.eyebrow{ letter-spacing:normal; text-wrap:wrap }   /* the Services label is a
     </div></div>
   </figure>
 
-  <div class="vf" data-r>
+  <div class="vf" id="visit-form" tabindex="-1" data-r>
     <form class="vf-in" data-vf novalidate>
       <h3>Schedule Your Visit</h3>
       <div class="vf-f"><input id="v-name" name="name" type="text" placeholder=" " autocomplete="name" required aria-describedby="v-name-m"><label for="v-name">First and last name</label><p class="vf-msg" id="v-name-m">Please add your name.</p></div>
@@ -1933,7 +1937,7 @@ h2.eyebrow{ letter-spacing:normal; text-wrap:wrap }   /* the Services label is a
         <p class="eyebrow" data-r>Find us</p>
         <h2 data-split>Three Offices Across <em class="nw">the Northwoods</em></h2>
       </div>
-      <ul class="off-list">
+      <ul class="off-list" id="office-list" tabindex="-1">
         <li class="on" data-office="pf">
           <button class="off-btn" type="button"><span>Park Falls</span><i aria-hidden="true"></i></button>
           <div class="off-body" id="off-body-pf"><div>
@@ -2011,8 +2015,8 @@ h2.eyebrow{ letter-spacing:normal; text-wrap:wrap }   /* the Services label is a
 </footer>
 
 <nav class="dock" aria-label="Quick actions">
-  <a class="btn ghost" href="#offices">Call an office</a>
-  <a class="btn" href="#visit">Schedule Your Visit</a>
+  <a class="btn ghost" href="#office-list">Call an office</a>
+  <a class="btn" href="#visit-form">Schedule Your Visit</a>
 </nav>
 
 </div>
@@ -2358,13 +2362,16 @@ h2.eyebrow{ letter-spacing:normal; text-wrap:wrap }   /* the Services label is a
   });
 
   /* ---- header state ---- */
-  var hdr = $('.hdr'), hdrBar = $('.hdr-bar'), dock = $('.dock'), darks = $$('.on-dark');
+  var hdr = $('.hdr'), hdrBar = $('.hdr-bar'), dock = $('.dock'), darks = $$('.on-dark'), tint = $('meta[name="theme-color"]');
   function ui() {
     var y = window.scrollY, line = hdrBar.offsetHeight / 2, dark = false;
     darks.forEach(function (el) { var r = el.getBoundingClientRect(); if (r.top <= line && r.bottom > line) dark = true; });
     hdr.classList.toggle('solid', y > 24);
     hdr.classList.toggle('dark', dark);
     dock.classList.toggle('away', y < 320);
+    /* the browser's own bars (Safari, Chrome on phones) take the colour of the header under them: paper, the white bar, or ink */
+    var c = dark ? '#2C3530' : y > 24 ? '#FFFFFF' : '#F7F5EF';
+    if (tint && tint.content !== c) tint.content = c;
   }
   ui();
   /* the Visit form has its own button: the dock steps away while the form is in the window */
@@ -2474,14 +2481,17 @@ h2.eyebrow{ letter-spacing:normal; text-wrap:wrap }   /* the Services label is a
   }
 
   /* scroll scenes: each scene gets --p (0..1), eased a little so it feels weighty, updated only while it is on screen */
-  var story = $('.story'), chapEls = $$('.chap'), chapter = -1;
+  var story = $('.story'), chapEls = $$('.chap'), chapter = -1, ringsBar = $('.rings');
   var scenes = $$('[data-scene]').map(function (el) { return { el: el, kind: el.getAttribute('data-scene'), cur: 0, tgt: 0, on: false, fresh: true }; });
   function target(s, vh) {
     var r = s.el.getBoundingClientRect();
     if (s.kind === 'hero' && wide()) return clamp(-r.top / Math.max(1, r.height - vh));
     if (s.kind === 'story') {
       /* each chapter owns a third of the progress, so the rings of its years are drawn while it is being read — on any screen */
-      var tops = chapEls.map(function (ch) { return ch.getBoundingClientRect(); }), line = vh * 0.58, idx = 0;
+      /* a chapter takes over when its top reaches the line: mid-screen beside the big figure; on phones (one column, the medallion
+         pinned as a bar under the header) just under that bar, so the year changes once the chapter itself is at the top */
+      var line = kww.clientWidth < 700 ? ringsBar.getBoundingClientRect().bottom + 24 : vh * 0.58;
+      var tops = chapEls.map(function (ch) { return ch.getBoundingClientRect(); }), idx = 0;
       tops.forEach(function (t, i) { if (t.top < line) idx = i; });
       if (idx !== chapter) { chapter = idx; story.setAttribute('data-ch', idx); }
       var from = idx ? line : vh * 0.66, span = idx < 2 ? tops[idx + 1].top - tops[idx].top + (from - line) : tops[2].height * 0.6;
@@ -2686,19 +2696,6 @@ h2.eyebrow{ letter-spacing:normal; text-wrap:wrap }   /* the Services label is a
     box.addEventListener('animationend', function (e) { if (e.animationName !== 'dr-fill') return; if (++steps >= items.length) box.classList.add('rest'); go(n + 1); });
   });
 
-  /* keeps the chosen card where the eye is while the layout around it changes (phones: the story above it folds away) */
-  function glide(el) {
-    var y0 = el.getBoundingClientRect().top, y1 = top(), t0 = performance.now(), ms = 820;
-    if (!html.classList.contains('m')) {      /* reduced motion: no glide, one correction once the layout has changed */
-      setTimeout(function () { var dy = el.getBoundingClientRect().top - y1; if (Math.abs(dy) > .5) scrollBy({ top: dy, behavior: 'instant' }); }, 60);
-      return;
-    }
-    (function f(now) {
-      var t = Math.min(1, (now - t0) / ms), want = y0 + (y1 - y0) * io3(t), dy = el.getBoundingClientRect().top - want;
-      if (Math.abs(dy) > .5) scrollBy({ top: dy, behavior: 'instant' });
-      if (t < 1) requestAnimationFrame(f);
-    })(t0);
-  }
   /* brings the whole opened thing into view if part of it is off screen: h = height it will have, from el's top */
   function fit(el, h) {
     var r = el.getBoundingClientRect(), up = r.top - top(), down = r.top + h + 16 - innerHeight;
@@ -2707,16 +2704,25 @@ h2.eyebrow{ letter-spacing:normal; text-wrap:wrap }   /* the Services label is a
   }
 
   function set(el, byKey) {
-    var m = mode();
+    var m = mode(), y = el && el.getBoundingClientRect().top;
+    /* phones: a profile open above the chosen one folds at once (.snap) and the scroll takes up its height in the same frame,
+       so the chosen card does not move; then the browser's own smooth scroll brings it under the header. No per-frame scrolling:
+       iOS Safari cannot keep up with it while the heights animate, and the cards shake */
     cur = el;
     cards.forEach(function (c) {
       var on = c === el, hit = c.querySelector('.dr-hit');
       if (on && !c.classList.contains('on')) c.rewind();
+      if (m === 'v' && el && !on && c.classList.contains('on') && cards.indexOf(c) < cards.indexOf(el)) c.classList.add('snap');
       c.classList.toggle('on', on); hit.setAttribute('aria-expanded', on);
     });
     row.classList.toggle('rest', !el);
     if (!el) return;
-    if (m === 'v') glide(el);
+    if (m === 'v') {
+      var dy = el.getBoundingClientRect().top - y;
+      cards.forEach(function (c) { c.classList.remove('snap'); });
+      if (dy) scrollBy({ top: dy, behavior: 'instant' });
+      scrollBy({ top: el.getBoundingClientRect().top - top(), behavior: html.classList.contains('m') ? 'smooth' : 'instant' });
+    }
     else if (m === 't') scrollBy({ top: el.querySelector('.dr-card').getBoundingClientRect().bottom + (parseFloat(getComputedStyle(el.querySelector('.dr-in')).marginTop) || 0) - top(), behavior: html.classList.contains('m') ? 'smooth' : 'instant' });   /* the top of the panel goes under the header */
     else fit(row, row.offsetHeight);
     if (byKey && m === 'h') el.querySelector('.dr-x').focus({ preventScroll: true });
@@ -2851,9 +2857,13 @@ h2.eyebrow{ letter-spacing:normal; text-wrap:wrap }   /* the Services label is a
       var n = i + 1;
       if (wide()) { if (n !== active) centre(n); return; }
       if (!ev.target.closest('button') || n === active) return;
-      var prev = beliefs[active - 1], gone = n > active ? prev.querySelector('.belief-body').offsetHeight : 0;
-      var top = b.getBoundingClientRect().top - gone, min = Math.max(0, hdr ? hdr.querySelector('.hdr-bar').getBoundingClientRect().bottom : 0) + 10;
+      /* the open belief above folds at once (.snap) and the scroll takes up its height in the same frame, so the tapped title
+         stays under the finger instead of sliding up while both bodies animate (that shook on iOS); only the new body unfolds */
+      var prev = beliefs[active - 1], above = n > active, y = b.getBoundingClientRect().top;
+      if (above) prev.classList.add('snap');
       setActive(n);
+      if (above) { var dy = b.getBoundingClientRect().top - y; prev.classList.remove('snap'); if (dy) window.scrollBy({ top: dy, behavior: 'instant' }); }
+      var top = b.getBoundingClientRect().top, min = Math.max(0, hdr ? hdr.querySelector('.hdr-bar').getBoundingClientRect().bottom : 0) + 10;
       if (top < min) window.scrollBy({ top: top - min, behavior: motion ? 'smooth' : 'auto' });
     });
   });
