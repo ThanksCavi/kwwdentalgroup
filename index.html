@@ -26,6 +26,11 @@
 :root{
   --ink:#2C3530; --pine:#78966D; --pine-d:#55704B; --sage:#9CBB8E; --paper:#F7F5EF; --mist:#EEF2EA; --mist-2:#E1E9DB;
   --mut:#55615A; --line:rgba(44,53,48,.14); --need:#FFE9A8;
+  /* every flat green surface (visit, menu form, seal, open doctor card): lighter and warmer than --sage, which stays for accents on dark.
+     The surface is --sage-bg under a warm fine grain (cream and olive specks, soft-light); the base is darkened so the grain averages out to --sage-tone exactly.
+     --sage-tone is for solid bits that must match the surface (ring around the doctor-card plus). Variants A–E: ../visit-bg.html */
+  --sage-tone:#B9CCA4; --sage-bg:#B1C7A1;
+  --sage-grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 .1 .92 0 0 0 .04 .72 0 0 0 -.06 0 0 0 0 .4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0/calc(240*var(--u));
   --serif:"Cormorant Garamond","Cormorant",Georgia,"Times New Roman",serif; --sans:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
   --ease:cubic-bezier(.2,.7,.1,1); --vh:1vh;
 }
@@ -202,7 +207,7 @@ body{ margin:0; background:#fff }
 .menu-off span{ display:block; font-size:calc(15*var(--u)); line-height:1.4; color:var(--mut); margin:calc(3*var(--u)) 0 calc(5*var(--u)) }
 .menu-off a{ font:500 calc(17*var(--u))/1.4 var(--sans); font-variant-numeric:tabular-nums }
 /* the form panel: the sage follows the paper down a beat later */
-.menu-form{ --ln:rgba(44,53,48,.36); --soft:rgba(44,53,48,.84); --fh:clamp(calc(54*var(--u)),calc(var(--vh)*7.2),calc(72*var(--u))); min-width:0; overflow:auto; overscroll-behavior:contain; background:var(--sage); padding:var(--mt) var(--g) var(--mb) calc(4*var(--c));
+.menu-form{ --ln:rgba(44,53,48,.36); --soft:rgba(44,53,48,.84); --fh:clamp(calc(54*var(--u)),calc(var(--vh)*7.2),calc(72*var(--u))); min-width:0; overflow:auto; overscroll-behavior:contain; background:var(--sage-grain),var(--sage-bg); background-blend-mode:soft-light; padding:var(--mt) var(--g) var(--mb) calc(4*var(--c));
   clip-path:inset(0 0 100% 0); transition:clip-path 0s .65s }
 .menu-open .menu-form{ clip-path:inset(0 0 0 0); transition:clip-path 1.05s var(--ease) .1s }
 .mf-tog{ display:none }
@@ -305,7 +310,7 @@ body{ margin:0; background:#fff }
 .hero-cta{ display:flex; flex-wrap:wrap; align-items:center; gap:calc(10*var(--u)) calc(30*var(--u)) }
 .hero-cue{ position:absolute; z-index:2; left:var(--g); bottom:calc(var(--vh)*2.2); display:flex; align-items:center; gap:calc(12*var(--u)); font:500 calc(11.5*var(--u))/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; color:var(--mut); opacity:calc(1 - var(--p)*6) }
 .hero-cue b{ width:calc(1.5*var(--u)); height:calc(var(--vh)*3.6); background:linear-gradient(var(--pine-d) 50%,rgba(44,53,48,.16) 50%) 0 0/100% 200% }
-.seal{ position:relative; width:calc(132*var(--u)); height:calc(132*var(--u)); flex:none; border-radius:50%; background:var(--sage); display:grid; place-items:center }
+.seal{ position:relative; width:calc(132*var(--u)); height:calc(132*var(--u)); flex:none; border-radius:50%; background:var(--sage-grain),var(--sage-bg); background-blend-mode:soft-light; display:grid; place-items:center }
 .seal svg{ position:absolute; inset:calc(6*var(--u)); width:calc(100% - calc(12*var(--u))); height:calc(100% - calc(12*var(--u))); transform:rotate(calc(var(--p)*240deg)) }
 .seal text{ font:500 15.5PX var(--sans); letter-spacing:.2em; fill:var(--ink) }
 .seal img{ width:30%; height:auto }
@@ -476,11 +481,11 @@ body{ margin:0; background:#fff }
   .dr[data-dr="1"] .dr-card{ grid-column:1 } .dr[data-dr="2"] .dr-card{ grid-column:2 } .dr[data-dr="3"] .dr-card{ grid-column:3 }
   .dr-img,.dr-row.rest .dr-img,.dr.on .dr-img{ width:auto; right:0; bottom:calc(var(--foot) - calc(2*var(--u))); transform:none }
   .dr-foot,.dr.on .dr-foot{ transform:none }
-  .dr.on .dr-foot{ background:var(--sage) }
+  .dr.on .dr-foot{ background:var(--sage-grain),var(--sage-bg); background-blend-mode:soft-light }
   .dr-foot .n1,.dr-row.rest .dr-foot .n1{ left:calc(20*var(--u)); font-size:clamp(calc(21*var(--u)),calc(2.5*var(--c)),calc(27*var(--u))); opacity:1; transition:color .3s }
   .dr-foot .n2,.dr-row.rest .dr-foot .n2{ opacity:0; transition:color .3s }
   .dr.on .dr-hit{ visibility:visible }
-  .dr.on .dr-plus{ transform:rotate(45deg); box-shadow:0 0 0 calc(5*var(--u)) var(--sage) }
+  .dr.on .dr-plus{ transform:rotate(45deg); box-shadow:0 0 0 calc(5*var(--u)) var(--sage-tone) }
   .dr.on .dr-card:hover .dr-plus{ transform:rotate(135deg); background:var(--pine-d) }
   .dr.on .dr-card:hover .dr-img .alt{ opacity:0 }
   .dr-panel,.dr.on .dr-panel,.dr-row.rest .dr-panel{ grid-row:2; grid-column:1/-1; margin:0; width:auto; min-height:0; overflow:hidden; background:none; transform:none; opacity:0; transition:opacity .25s,visibility 0s .25s }
@@ -930,8 +935,7 @@ body{ margin:0; background:#fff }
    The form has no card: ruled fields sit straight on the sage, like the ruled lists elsewhere on the page.
    --aw is the arch's width; the three thin outlines around it are ripples (static without motion). */
 .cta{ --aw:calc(27*var(--c)); --rs:.15; --ln:rgba(44,53,48,.36); --soft:rgba(44,53,48,.84); position:relative; isolation:isolate; padding:var(--sy) var(--g);
-  --wash:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' preserveAspectRatio='none'%3E%3Cfilter id='w' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0024 .0085' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 .62 0 0 0 -.18'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E") center/calc(1500*var(--u)) calc(1000*var(--u)); --bg:#A2BF94;
-  background:radial-gradient(calc(44*var(--c)) calc(40*var(--c)) at 50% 64%,rgba(255,255,255,.2),rgba(255,255,255,0) 72%),var(--wash),var(--bg);
+  background:var(--sage-grain),var(--sage-bg); background-blend-mode:soft-light;
   scroll-margin-top:calc(calc(110*var(--u)) - var(--sy)); display:grid; grid-template-columns:minmax(0,1fr) var(--aw) minmax(0,1fr); column-gap:calc(5.5*var(--c));
   grid-template-areas:"head head head" "copy pic form" "tel pic form"; grid-template-rows:auto auto 1fr }
 .cta .eyebrow,.cta em{ color:var(--ink) }
@@ -1043,8 +1047,7 @@ body{ margin:0; background:#fff }
 
 /* laptops in a narrow window and tablets: the headline stays on top, the arch and the form stand side by side, the phones run under both */
 @container kww (max-width:1199px){
-  .cta{ --aw:calc(37*var(--c)); grid-template-columns:var(--aw) minmax(0,1fr); column-gap:calc(7*var(--c)); grid-template-areas:"head head" "copy copy" "pic form" "tel tel"; grid-template-rows:auto;
-    background:radial-gradient(calc(52*var(--c)) calc(56*var(--c)) at 26% 60%,rgba(255,255,255,.2),rgba(255,255,255,0) 72%),var(--wash),var(--bg) }
+  .cta{ --aw:calc(37*var(--c)); grid-template-columns:var(--aw) minmax(0,1fr); column-gap:calc(7*var(--c)); grid-template-areas:"head head" "copy copy" "pic form" "tel tel"; grid-template-rows:auto }
   .cta-head{ margin-bottom:calc(24*var(--u)) }
   .cta-copy{ justify-self:center; max-width:calc(640*var(--u)); text-align:center; margin-bottom:clamp(calc(44*var(--u)),calc(5.4*var(--c)),calc(60*var(--u))) }
   .cta-tel{ margin-top:clamp(calc(52*var(--u)),calc(6*var(--c)),calc(68*var(--u))) }
@@ -1064,8 +1067,7 @@ body{ margin:0; background:#fff }
 
 /* phones: one column — headline, arch, form, phones */
 @container kww (max-width:699px){
-  .cta{ --aw:min(calc(100CQW - calc(68*var(--u))),calc(430*var(--u))); grid-template-columns:minmax(0,1fr); grid-template-areas:"head" "copy" "pic" "form" "tel";
-    background:radial-gradient(120CQW 100CQW at 50% 30%,rgba(255,255,255,.2),rgba(255,255,255,0) 70%),var(--wash),var(--bg) }
+  .cta{ --aw:min(calc(100CQW - calc(68*var(--u))),calc(430*var(--u))); grid-template-columns:minmax(0,1fr); grid-template-areas:"head" "copy" "pic" "form" "tel" }
   .cta-head{ justify-items:start; text-align:left; margin-bottom:calc(18*var(--u)) }
   .cta .eyebrow::after{ display:none }
   .cta-copy{ justify-self:start; text-align:left; margin-bottom:calc(54*var(--u)) }
