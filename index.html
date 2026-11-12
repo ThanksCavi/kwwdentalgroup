@@ -222,7 +222,7 @@ body{ margin:0; background:#fff }
 .menu-form .vf-f{ margin-top:calc(4*var(--u)) }
 .menu-form .mf-h+.vf-f,.menu-form .vf-end{ margin-top:auto }
 .menu-form .vf-f input,.menu-form .vf-f select{ height:var(--fh); padding:calc(var(--fh) - calc(36*var(--u))) 0 calc(6*var(--u)) }
-.menu-form .vf-f select{ padding-right:calc(28*var(--u)); background-position:right calc(2*var(--u)) top calc(var(--fh) - calc(26*var(--u))) }
+.menu-form .vf-sel::before{ top:calc(var(--fh) - calc(25*var(--u))) }
 .menu-form .vf-f label{ top:calc(var(--fh) - calc(35*var(--u))) }
 .menu-form .vf-f::after{ top:calc(var(--fh) - calc(2*var(--u))) }
 .menu-form .vf-off{ margin-top:clamp(calc(12*var(--u)),calc(var(--vh)*2),calc(20*var(--u))) }
@@ -996,12 +996,15 @@ body{ margin:0; background:#fff }
 .vf-in h3{ font-size:clamp(calc(30*var(--u)),calc(2.3*var(--c)),calc(39.5*var(--u))); line-height:1.05; margin-bottom:calc(6*var(--u)) }
 .vf-f{ position:relative; margin-top:calc(12*var(--u)) }
 .vf-f input,.vf-f select{ display:block; width:100%; height:calc(62*var(--u)); margin:0; padding:calc(26*var(--u)) 0 calc(6*var(--u)); border:0; border-bottom:calc(1*var(--u)) solid var(--ln); border-radius:0; background:none; color:var(--ink); font:500 calc(19*var(--u))/1.2 var(--sans); appearance:none; -webkit-appearance:none; outline:0; transition:border-color .3s }
-.vf-f select{ cursor:pointer; padding-right:calc(28*var(--u)); text-overflow:ellipsis;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' fill='none' stroke='%232C3530' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l6 6 6-6'/%3E%3C/svg%3E") right calc(2*var(--u)) top calc(36*var(--u))/calc(14*var(--u)) no-repeat }
+.vf-f select{ cursor:pointer; padding-right:calc(28*var(--u)); text-overflow:ellipsis }
+/* the chevron is drawn by the field, not the select, so it can turn over while the list is open */
+.vf-sel::before{ content:""; position:absolute; right:calc(2*var(--u)); top:calc(37*var(--u)); width:calc(13*var(--u)); height:calc(7*var(--u)); pointer-events:none; will-change:transform; transition:transform .45s var(--ease);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='7' fill='none' stroke='%232C3530' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M.75.75l5.75 5.5 5.75-5.5'/%3E%3C/svg%3E") center/100% no-repeat }
+.vf-sel.open::before{ transform:rotate(180deg) }
 .vf-f input:-webkit-autofill{ -webkit-text-fill-color:var(--ink); transition:background-color 600000s 0s,color 600000s 0s }
 .vf-f label{ position:absolute; left:0; top:calc(27*var(--u)); font:400 calc(18*var(--u))/1.3 var(--sans); color:var(--soft); pointer-events:none; transform-origin:0 0; transition:transform .4s var(--ease) }
 .vf-f input:focus~label,.vf-f input:not(:placeholder-shown)~label,.vf-f input:-webkit-autofill~label,.vf-f.has label{ transform:translateY(calc(-23*var(--u))) scale(.76) }
-.vf-f input:focus-visible,.vf-f select:focus-visible{ outline:0 }
+.vf-f input:focus-visible,.vf-f select:focus-visible{ outline:0; border-radius:0 }   /* the field marks focus with its underline; the page-wide focus ring would also round its corners and bend the underline up at the ends */
 .vf-f::after{ content:""; position:absolute; left:0; right:0; top:calc(60*var(--u)); height:calc(2*var(--u)); background:var(--ink); transform:scaleX(0); transform-origin:0 50%; transition:transform .7s var(--ease); pointer-events:none }
 .vf-f:focus-within::after{ transform:none }
 .vf-f input:hover,.vf-f select:hover{ border-bottom-color:var(--ink) }
@@ -1009,6 +1012,25 @@ body{ margin:0; background:#fff }
 .vf-f.err::after{ background:#6F170E; transform:none }
 .vf-msg{ display:none; font:500 calc(13.5*var(--u))/1.3 var(--sans); color:#6F170E; margin-top:calc(7*var(--u)) }
 .vf-f.err .vf-msg{ display:block }
+/* "Interested in": our own list under the field (page.js builds it from the select's options; mouse and keyboard only, touch keeps the system picker).
+   It sits in the top layer as a popover, so the menu panel's scroll box never clips it; page.js hangs it right under the field's underline,
+   exactly as wide as the field. With no room below it opens above the field: the label sits between, so it cannot grow out of the underline
+   and stands as a whole rounded card a short step above the field instead.
+   Ink like the Request button and a chosen office: the field's dark underline runs straight on into it, so the open field reads as one dark piece.
+   No rules between rows: they are told apart by air, and the row under the pointer lights up inside the list's inset. */
+.vf-list{ position:fixed; inset:auto; margin:0; padding:calc(6*var(--u)); border:0; border-radius:0 0 calc(14*var(--u)) calc(14*var(--u)); color:rgba(255,255,255,.86); list-style:none; color-scheme:dark;
+  background:var(--ink);
+  max-height:min(calc(440*var(--u)),calc(var(--vh)*70)); overflow:auto; overscroll-behavior:contain;
+  box-shadow:0 calc(14*var(--u)) calc(24*var(--u)) calc(-16*var(--u)) rgba(44,53,48,.4);
+  clip-path:inset(0 calc(-40*var(--u)) 100% calc(-40*var(--u))); transition:clip-path .18s var(--ease),overlay .18s allow-discrete,display .18s allow-discrete }
+.vf-list.up{ border-radius:calc(14*var(--u)); box-shadow:0 calc(-14*var(--u)) calc(24*var(--u)) calc(-16*var(--u)) rgba(44,53,48,.24); clip-path:inset(100% calc(-40*var(--u)) 0 calc(-40*var(--u))) }
+.vf-list:popover-open{ clip-path:inset(0 calc(-40*var(--u)) calc(-60*var(--u)) calc(-40*var(--u))); transition:clip-path .55s var(--ease),overlay .55s allow-discrete,display .55s allow-discrete }
+.vf-list.up:popover-open{ clip-path:inset(calc(-60*var(--u)) calc(-40*var(--u)) 0 calc(-40*var(--u))) }
+@starting-style{ .vf-list:popover-open{ clip-path:inset(0 -40px 100% -40px) } .vf-list.up:popover-open{ clip-path:inset(100% -40px 0 -40px) } }
+.vf-list li{ position:relative; padding:calc(11*var(--u)) calc(40*var(--u)) calc(11*var(--u)) calc(14*var(--u)); border-radius:calc(9*var(--u)); font:500 calc(17*var(--u))/1.3 var(--sans); cursor:pointer; transition:background-color .25s,color .25s }
+.vf-list li.cur{ background:rgba(255,255,255,.1); color:#fff }
+.vf-list li[aria-selected="true"]::after{ content:""; position:absolute; right:calc(14*var(--u)); top:50%; width:calc(13*var(--u)); height:calc(9*var(--u)); margin-top:calc(-4.5*var(--u));
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='9' fill='none' stroke='%23fff' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M.75 4.6l3.9 3.65L12.25.75'/%3E%3C/svg%3E") center/100% no-repeat }
 
 .vf-off{ border:0; margin:calc(24*var(--u)) 0 0; padding:0; min-width:0 }
 .vf-off legend{ padding:0; margin-bottom:calc(12*var(--u)); font:400 calc(13.7*var(--u))/1.3 var(--sans); color:var(--soft) }
@@ -2157,6 +2179,91 @@ body{ margin:0; background:#fff }
     var mapIO = new IntersectionObserver(function (en) { if (en.some(function (e) { return e.isIntersecting; })) { mapIO.disconnect(); loadMap(); } }, { rootMargin: '900px 0px' });
     mapIO.observe(mapBox);
   }
+
+  /* ---- "Interested in": our own list instead of the system pop-up, for mouse and keyboard. The select stays the real field:
+     it keeps focus, holds the value and is submitted; a pick sets its value and fires its change event. Touch screens keep the system picker.
+     The same code can wrap the select of whatever form plugin the WordPress build ends up with. ---- */
+  var fine = window.matchMedia('(hover:hover) and (pointer:fine)');
+  $$('.vf-sel select').forEach(function (s) {
+    var f = s.parentNode, ul = d.createElement('ul');
+    if (!ul.showPopover) return;
+    var opts = Array.prototype.filter.call(s.options, function (o) { return o.value; }), cur = -1, open = false;
+    ul.className = 'vf-list'; ul.id = s.id + '-list'; ul.popover = 'manual'; ul.setAttribute('role', 'listbox'); ul.setAttribute('aria-label', f.querySelector('label').textContent);
+    var items = opts.map(function (o, k) {
+      var li = d.createElement('li'); li.id = ul.id + '-' + k; li.setAttribute('role', 'option'); li.textContent = o.text; ul.appendChild(li); return li;
+    });
+    f.appendChild(ul);
+    s.setAttribute('aria-controls', ul.id); s.setAttribute('aria-expanded', 'false');
+    function chosen() { for (var k = 0; k < opts.length; k++) if (opts[k].selected) return k; return -1; }
+    function mark(k, scroll) {
+      cur = k;
+      items.forEach(function (li, i) { li.classList.toggle('cur', i === k); });
+      if (k < 0) { s.removeAttribute('aria-activedescendant'); return; }
+      s.setAttribute('aria-activedescendant', items[k].id);
+      if (scroll) items[k].scrollIntoView({ block: 'nearest' });
+    }
+    /* right under the field's underline and as wide as the field. When the window has no room below and more above, the card covers
+       what stands over the field: its bottom goes 10 px past the end of the field before it, so that field's underline is hidden
+       even under the rounded corners, but stops short of this field's own label */
+    function place() {
+      var r = s.getBoundingClientRect(), h = ul.offsetHeight, below = window.innerHeight - r.bottom, up = below < h + 12 && r.top > below,
+          prev = f.previousElementSibling, lab = f.querySelector('label').getBoundingClientRect().top,
+          end = prev ? Math.min(prev.getBoundingClientRect().bottom + 10, lab - 4) : r.top - 8;
+      ul.classList.toggle('up', up);
+      ul.style.left = r.left + 'px'; ul.style.width = r.width + 'px';
+      ul.style.top = Math.max(8, up ? end - h : r.bottom) + 'px';
+    }
+    function show(keys) {
+      if (open) return;
+      open = true; f.classList.add('open'); s.setAttribute('aria-expanded', 'true');
+      var c = chosen();
+      items.forEach(function (li, i) { li.setAttribute('aria-selected', i === c); });
+      ul.showPopover(); place();
+      mark(c >= 0 ? c : keys ? 0 : -1, true);
+    }
+    function hide() {
+      if (!open) return;
+      open = false; f.classList.remove('open'); s.setAttribute('aria-expanded', 'false'); mark(-1); ul.hidePopover();
+    }
+    function pick(k) {
+      if (opts[k] && !opts[k].selected) { s.value = opts[k].value; s.dispatchEvent(new Event('change', { bubbles: true })); }
+      hide();
+    }
+    s.addEventListener('mousedown', function (e) {
+      if (!fine.matches || e.button) return;
+      e.preventDefault(); s.focus();
+      open ? hide() : show(false);
+    });
+    s.addEventListener('keydown', function (e) {
+      if (!fine.matches) return;
+      var k = e.key;
+      if (!open) {
+        if (k === 'ArrowDown' || k === 'ArrowUp' || k === 'Enter' || k === ' ') { e.preventDefault(); show(true); }
+        return;
+      }
+      if (k === 'Tab') { hide(); return; }
+      if (k === 'Escape') { e.preventDefault(); e.stopPropagation(); hide(); return; }   /* closes the list, not the menu around it */
+      var n = items.length, to = null;
+      if (k === 'ArrowDown') to = Math.min(n - 1, cur + 1);
+      else if (k === 'ArrowUp') to = Math.max(0, cur - 1);
+      else if (k === 'Home' || k === 'PageUp') to = 0;
+      else if (k === 'End' || k === 'PageDown') to = n - 1;
+      else if (k === 'Enter' || k === ' ') { e.preventDefault(); pick(cur); return; }
+      else if (k.length === 1 && /\S/.test(k)) {
+        for (var i = 1; i <= n; i++) { var j = (cur + i + n) % n; if (opts[j].text.charAt(0).toLowerCase() === k.toLowerCase()) { to = j; break; } }
+      }
+      if (to !== null) { e.preventDefault(); mark(to, true); }
+    });
+    s.addEventListener('blur', hide);
+    ul.addEventListener('mousedown', function (e) { e.preventDefault(); });   /* focus stays on the select */
+    items.forEach(function (li, k) {
+      li.addEventListener('mousemove', function () { if (cur !== k) mark(k); });
+      li.addEventListener('click', function () { pick(k); });
+    });
+    ul.addEventListener('mouseleave', function () { mark(-1); });
+    window.addEventListener('resize', hide);
+    window.addEventListener('scroll', function (e) { if (open && e.target !== ul) place(); }, true);
+  });
 
   /* ---- menu visit form: checks, then a thank-you state. Nothing is sent in the prototype. ---- */
   $$('form[data-visit]').forEach(function (form) {
