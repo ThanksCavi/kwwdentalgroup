@@ -336,7 +336,7 @@ body{ margin:0; background:#fff }
 .m .wel-pic .glass{ opacity:0; transition:opacity .5s ease }
 .m .wel-pic .frame.in .glass{ opacity:1 }
 .wel-pic figcaption{ margin-top:calc(14*var(--u)); font-size:calc(14*var(--u)); color:var(--mut) }
-.wel-pic .seal{ position:absolute; left:calc(var(--seal)*-.5); top:7%; width:var(--seal); height:var(--seal) }
+.wel-pic .seal{ position:absolute; left:calc(var(--seal)*-.5); top:7%; width:var(--seal); height:var(--seal); rotate:-12deg } /* tilted like a hand-pressed stamp; adds to the entrance turn, so it lands from -40deg to -12deg */
 .wel-pic .seal text{ font-size:16PX }
 .m .wel-pic .seal{ opacity:0; transform:scale(.72) rotate(-28deg); transition:opacity .5s .8s,transform 1.1s var(--ease) .8s }
 .m .wel-pic figcaption{ opacity:0; transition:opacity .9s 1s }
@@ -1469,7 +1469,7 @@ body{ margin:0; background:#fff }
       <svg viewBox="0 0 200 200"><defs><path id="seal-b" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#seal-b" textLength="497">THREE NAMES · ONE DOOR · ONE FAMILY PRACTICE · </textPath></text></svg>
       <img src="img/icon-ink.png" alt="" width="120" height="141">
     </div>
-    <!-- caption off for now: <figcaption>Manitowish Waters office.</figcaption> -->
+    <figcaption>Now it’s on the door. Manitowish Waters office.</figcaption>
   </figure>
 </section>
 
@@ -2079,7 +2079,10 @@ body{ margin:0; background:#fff }
       return narrow ? { top: 40, bottom: ch + 30, left: 0, right: 0 } : { top: Math.min(ch * .7, h * .3), bottom: 0, left: 0, right: 0 };
     }
     var map = new gl.Map({
-      container: el, attributionControl: false, cooperativeGestures: true, dragRotate: false, pitchWithRotate: false, touchPitch: false,
+      /* the dimming hint 'Hold ⌘ and scroll to zoom' is switched off on desktop: the wheel scrolls the page, zoom is the +/- buttons.
+         It stays on touch screens, or one-finger swipes over the map would stop the page scroll there.
+         To bring the hint back everywhere: cooperativeGestures: true and remove scrollZoom: false. */
+      container: el, attributionControl: false, cooperativeGestures: matchMedia('(pointer: coarse)').matches, scrollZoom: false, dragRotate: false, pitchWithRotate: false, touchPitch: false,
       renderWorldCopies: false, minZoom: 7.2, maxZoom: 13.6, maxBounds: [[-91.05, 45.5], [-89.15, 46.5]], fadeDuration: 0,
       bounds: ALL3, fitBoundsOptions: { padding: pad(true) },
       locale: { 'CooperativeGesturesHandler.WindowsHelpText': 'Hold Ctrl and scroll to zoom the map', 'CooperativeGesturesHandler.MacHelpText': 'Hold ⌘ and scroll to zoom the map', 'CooperativeGesturesHandler.MobileHelpText': 'Use two fingers to move the map' },
