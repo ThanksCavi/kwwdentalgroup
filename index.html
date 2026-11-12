@@ -88,12 +88,13 @@ body{ margin:0; background:#fff }
 
 /* header + burger */
 /* The bar is clear at the top of the page. Once the page moves it becomes a slightly lower bar of frosted white:
-   the page shows through softly (the same blur and strength as the dark state), the edge is a hairline and a very light, green-tinted shadow. */
+   the page shows through softly (the same blur and strength as the dark state). No hairline on the light bar: its edge is one short, faint
+   shadow in the ink colour (was a hairline plus a long olive shadow, 0 calc(1*var(--u)) 0 rgba(44,53,48,.07),0 calc(14*var(--u)) calc(34*var(--u)) calc(-18*var(--u)) rgba(72,92,64,.3), which read muddy over photos). */
 .hdr{ position:sticky; top:env(safe-area-inset-top,calc(0*var(--u))); z-index:60; height:calc(84*var(--u)); margin-bottom:calc(-84*var(--u)); transition:height .5s var(--ease),color .35s }
 .hdr.solid{ height:calc(72*var(--u)) }
 .hdr-bar{ position:relative; z-index:2; height:100%; display:flex; align-items:center; justify-content:space-between; gap:calc(20*var(--u)); padding:0 var(--g) }
 .hdr-bar::before{ content:""; position:absolute; z-index:-1; inset:0; background:rgba(255,255,255,.8);
-  -webkit-backdrop-filter:blur(calc(22*var(--u))) saturate(1.5); backdrop-filter:blur(calc(22*var(--u))) saturate(1.5); box-shadow:0 calc(1*var(--u)) 0 rgba(44,53,48,.07),0 calc(14*var(--u)) calc(34*var(--u)) calc(-18*var(--u)) rgba(72,92,64,.3);
+  -webkit-backdrop-filter:blur(calc(22*var(--u))) saturate(1.5); backdrop-filter:blur(calc(22*var(--u))) saturate(1.5); box-shadow:0 calc(10*var(--u)) calc(28*var(--u)) calc(-22*var(--u)) rgba(44,53,48,.22);
   opacity:0; transition:opacity .4s,background-color .35s,box-shadow .35s }
 .hdr.solid .hdr-bar::before{ opacity:1 }
 .logo{ display:block; width:calc(204*var(--u)); flex:none; transform-origin:0 50%; transition:transform .5s var(--ease) }
