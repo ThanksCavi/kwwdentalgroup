@@ -125,7 +125,7 @@ body{ margin:0; background:#fff }
 .call-pop li{ opacity:0; transform:translateY(calc(8*var(--u))); transition:opacity .2s,transform .2s }
 .call.open .call-pop li{ opacity:1; transform:none; transition:opacity .5s calc(.08s + var(--n)*.05s),transform .7s var(--ease) calc(.08s + var(--n)*.05s) }
 .call-pop li:nth-child(1){ --n:0 } .call-pop li:nth-child(2){ --n:1 } .call-pop li:nth-child(3){ --n:2 }
-.hdr-act>.btn{ min-height:calc(48*var(--u)); padding:0 calc(22*var(--u)); font-size:calc(15*var(--u)); transition:background-color .35s,color .35s }
+.hdr-act>.btn{ min-height:calc(48*var(--u)); padding:0 calc(22*var(--u)); font-size:calc(15*var(--u)); transition:none}
 /* over the two dark scenes the bar turns dark with them: no white strip across the rings */
 .kww:not(.menu-open) .hdr.dark{ color:#fff }
 .kww:not(.menu-open) .hdr.dark .hdr-bar::before{ background:rgba(44,53,48,.8); box-shadow:0 calc(1*var(--u)) 0 rgba(255,255,255,.1) }
@@ -150,7 +150,7 @@ body{ margin:0; background:#fff }
 .menu-open .hdr .logo{ transform:none }
 .menu-open .hdr .hdr-bar::before{ opacity:0 }
 /* the open menu has its own phones and its own form, so the bar keeps only the logo and Close */
-.call,.hdr-act>.btn{ transition:opacity .45s .3s,visibility 0s,background-color .35s,color .35s }
+.call,.hdr-act>.btn{ transition:opacity .45s .3s,visibility 0s}
 .menu-open .call,.menu-open .hdr-act>.btn{ opacity:0; visibility:hidden; transition:opacity .2s,visibility 0s .2s }
 
 /* ===== fullscreen menu — a global component =====
@@ -428,11 +428,11 @@ body{ margin:0; background:#fff }
 .dr-s{ opacity:0; transform:translateY(calc(20*var(--u))); transition:opacity .22s,transform 0s .22s }
 .dr.on .dr-s{ opacity:1; transform:none; transition:opacity .75s calc(.36s + var(--k)*.075s),transform 1s var(--ease) calc(.36s + var(--k)*.075s) }
 .dr-x{ position:absolute; z-index:1; top:clamp(calc(18*var(--u)),calc(1.8*var(--c)),calc(28*var(--u))); right:clamp(calc(18*var(--u)),calc(1.8*var(--c)),calc(28*var(--u))); width:calc(46*var(--u)); height:calc(46*var(--u)); padding:0; border:0; border-radius:50%; background:var(--mist); color:var(--ink); display:grid; place-items:center; cursor:pointer;
-  opacity:0; transform:rotate(-90deg) scale(.6); transition:opacity .2s,transform 0s .2s,background-color .3s,color .3s }
+  opacity:0; transform:rotate(-90deg) scale(.6); transition:opacity .2s,transform 0s .2s}
 .dr-x svg{ width:calc(16*var(--u)); height:calc(16*var(--u)); transform:rotate(45deg) }
-.dr.on .dr-x{ opacity:1; transform:none; transition:opacity .5s .55s,transform .9s var(--ease) .55s,background-color .3s,color .3s }
+.dr.on .dr-x{ opacity:1; transform:none; transition:opacity .5s .55s,transform .9s var(--ease) .55s}
 .dr-x:focus-visible,.dr-ticks:focus-visible{ border-radius:calc(999*var(--u)) }
-.dr.on .dr-x:hover{ background:var(--ink); color:#fff; transform:rotate(90deg); transition:transform .6s var(--ease),background-color .3s,color .3s }
+.dr.on .dr-x:hover{ background:var(--ink); color:#fff; transform:rotate(90deg); transition:transform .6s var(--ease)}
 
 /* arrival on scroll: the three cards rise one after another and each photo is unveiled from the top */
 .m .dr-row .dr{ transition:flex-basis var(--dur) var(--io),opacity .9s calc(var(--i)*.12s),translate 1.3s var(--ease) calc(var(--i)*.12s) }
@@ -542,7 +542,7 @@ body{ margin:0; background:#fff }
 /* each word is a link to its service page: the ring fills and its arrow turns up-right, the word changes colour, the other two step back */
 .svc-big a{ display:inline-flex; align-items:center; gap:.13em; color:var(--ink); text-decoration:none; transition:color .4s,opacity .5s }
 .svc-big li:nth-child(2) a{ color:var(--pine-d) }
-.svc-big i{ width:.3em; height:.3em; flex:none; margin-top:.1em; border-radius:50%; box-shadow:inset 0 0 0 calc(1.5*var(--u)) var(--ink); color:var(--ink); display:grid; place-items:center; transition:background-color .4s,color .4s,transform .5s var(--ease) }
+.svc-big i{ width:.3em; height:.3em; flex:none; margin-top:.1em; border-radius:50%; box-shadow:inset 0 0 0 calc(1.5*var(--u)) var(--ink); color:var(--ink); display:grid; place-items:center; transition:transform .5s var(--ease) }
 .svc-big i svg{ width:34%; height:34% }
 .svc-big a:hover{ color:var(--pine-d) } .svc-big li:nth-child(2) a:hover{ color:var(--ink) }
 .svc-big a:hover i{ background:var(--ink); color:#fff; transform:rotate(-45deg) }
@@ -658,7 +658,7 @@ body{ margin:0; background:#fff }
 .off-btn{ all:unset; box-sizing:border-box; display:flex; align-items:center; justify-content:space-between; gap:calc(16*var(--u)); width:100%; padding:clamp(calc(19*var(--u)),calc(1.7*var(--c)),calc(26*var(--u))) 0; cursor:pointer; font:500 clamp(calc(27*var(--u)),calc(2.4*var(--c)),calc(41*var(--u)))/1.06 var(--serif); letter-spacing:-.012em; transition:color .3s,padding .5s var(--ease) }
 .off-btn:focus-visible{ outline:calc(3*var(--u)) solid var(--pine-d); outline-offset:calc(3*var(--u)); border-radius:calc(6*var(--u)) }
 .off-btn:hover{ color:var(--pine-d); padding-left:calc(10*var(--u)) }
-.off-btn i{ position:relative; width:calc(42*var(--u)); height:calc(42*var(--u)); flex:none; border-radius:50%; box-shadow:inset 0 0 0 calc(1.5*var(--u)) currentColor; transition:background .4s,transform .6s var(--ease) }
+.off-btn i{ position:relative; width:calc(42*var(--u)); height:calc(42*var(--u)); flex:none; border-radius:50%; box-shadow:inset 0 0 0 calc(1.5*var(--u)) currentColor; transition:transform .6s var(--ease) }
 .off-btn i::before,.off-btn i::after{ content:""; position:absolute; left:calc(13*var(--u)); right:calc(13*var(--u)); top:50%; height:calc(1.5*var(--u)); margin-top:calc(-.75*var(--u)); background:currentColor; transition:transform .5s var(--ease) }
 .off-btn i::after{ transform:rotate(90deg) }
 .off-btn:hover i{ transform:rotate(90deg) }
@@ -709,7 +709,7 @@ body{ margin:0; background:#fff }
 .pin{ position:absolute; left:0; top:0; width:0; height:0; padding:0; border:0; background:none; color:var(--ink); font:500 calc(14*var(--u))/1 var(--sans); cursor:pointer; --tx:-50% }
 .pin::before{ content:""; position:absolute; left:calc(-6*var(--u)); top:calc(-6*var(--u)); width:calc(12*var(--u)); height:calc(12*var(--u)); border-radius:50%; background:var(--ink); box-shadow:0 0 0 calc(3*var(--u)) #fff; transition:transform .5s var(--ease),background-color .3s }
 .pin::after{ content:""; position:absolute; left:calc(-22*var(--u)); top:calc(-22*var(--u)); width:calc(44*var(--u)); height:calc(44*var(--u)) }
-.pin span{ position:absolute; left:0; top:calc(17*var(--u)); transform:translateX(var(--tx)); padding:calc(9*var(--u)) calc(15*var(--u)); border-radius:calc(99*var(--u)); background:#fff; box-shadow:inset 0 0 0 calc(1*var(--u)) rgba(44,53,48,.14),0 calc(6*var(--u)) calc(14*var(--u)) calc(-8*var(--u)) rgba(34,42,38,.4); white-space:nowrap; transition:background-color .3s,color .3s,box-shadow .3s }
+.pin span{ position:absolute; left:0; top:calc(17*var(--u)); transform:translateX(var(--tx)); padding:calc(9*var(--u)) calc(15*var(--u)); border-radius:calc(99*var(--u)); background:#fff; box-shadow:inset 0 0 0 calc(1*var(--u)) rgba(44,53,48,.14),0 calc(6*var(--u)) calc(14*var(--u)) calc(-8*var(--u)) rgba(34,42,38,.4); white-space:nowrap; transition:box-shadow .3s }
 .pin i{ position:absolute; left:calc(-48*var(--u)); top:calc(-48*var(--u)); width:calc(96*var(--u)); height:calc(96*var(--u)); border-radius:50%; box-shadow:inset 0 0 0 calc(1.2*var(--u)) var(--pine-d); opacity:0; pointer-events:none }
 .pin:not(.on):hover::before{ transform:scale(1.4); background:var(--pine-d) } .pin:not(.on):hover span{ background:var(--ink); color:#fff; box-shadow:none }
 .pin:focus-visible{ outline:0 } .pin:focus-visible span{ outline:calc(3*var(--u)) solid var(--pine-d); outline-offset:calc(3*var(--u)) }
@@ -719,7 +719,7 @@ body{ margin:0; background:#fff }
 .m .pin.on i{ animation:halo 3.6s var(--ease) infinite } .m .pin.on i+i{ animation-delay:1.8s }
 @keyframes halo{ from{ transform:scale(.36); opacity:.55 } to{ transform:scale(1); opacity:0 } }
 .map-b{ all:unset; box-sizing:border-box; display:grid; place-items:center; width:calc(44*var(--u)); height:calc(44*var(--u)); border-radius:calc(99*var(--u)); background:#fff; color:var(--ink); font:500 calc(14*var(--u))/1 var(--sans); cursor:pointer;
-  box-shadow:inset 0 0 0 calc(1*var(--u)) rgba(44,53,48,.14),0 calc(8*var(--u)) calc(18*var(--u)) calc(-12*var(--u)) rgba(34,42,38,.45); transition:background-color .3s,color .3s,opacity .4s,transform .5s var(--ease),visibility 0s }
+  box-shadow:inset 0 0 0 calc(1*var(--u)) rgba(44,53,48,.14),0 calc(8*var(--u)) calc(18*var(--u)) calc(-12*var(--u)) rgba(34,42,38,.45); transition:opacity .4s,transform .5s var(--ease),visibility 0s }
 .map-b svg{ width:calc(15*var(--u)); height:calc(15*var(--u)) }
 .map-b:hover{ background:var(--ink); color:#fff }
 .map-b:active{ transform:scale(.94) }
@@ -738,7 +738,7 @@ body{ margin:0; background:#fff }
 .map-card .mc-t{ display:block; padding:calc(13*var(--u)) calc(18*var(--u)) calc(15*var(--u)); font:500 calc(15*var(--u))/1.35 var(--sans) }
 .map-card b{ display:block; font-weight:500 }
 .map-card small{ display:block; font:400 calc(14*var(--u))/1.4 var(--sans); color:var(--mut) }
-.map-card i{ position:absolute; right:calc(12*var(--u)); top:calc(12*var(--u)); width:calc(36*var(--u)); height:calc(36*var(--u)); border-radius:50%; background:#fff; color:var(--ink); display:grid; place-items:center; transition:background-color .3s,color .3s }
+.map-card i{ position:absolute; right:calc(12*var(--u)); top:calc(12*var(--u)); width:calc(36*var(--u)); height:calc(36*var(--u)); border-radius:50%; background:#fff; color:var(--ink); display:grid; place-items:center; transition:none}
 .map-card i svg{ width:calc(14*var(--u)); height:calc(14*var(--u)); transform:rotate(-45deg); transition:transform .4s var(--ease) }
 .map-card a:hover i{ background:var(--ink); color:#fff }
 .map-card a:hover i svg{ transform:rotate(-45deg) translateX(calc(2*var(--u))) }
@@ -979,7 +979,7 @@ body{ margin:0; background:#fff }
 .vf-off div{ display:flex; flex-wrap:wrap; gap:clamp(calc(5*var(--u)),calc(.5*var(--c)),calc(8*var(--u))) }   /* the three offices share one row down to a 1440 px window: the pills tighten with the page frame */
 .vf-off label{ position:relative; cursor:pointer }
 .vf-off input{ position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:pointer }
-.vf-off span{ position:relative; isolation:isolate; overflow:hidden; display:block; padding:calc(12.5*var(--u)) clamp(calc(11*var(--u)),calc(calc(2.6*var(--c)) - calc(26.5*var(--u))),calc(18*var(--u))); border-radius:calc(999*var(--u)); box-shadow:inset 0 0 0 calc(1.5*var(--u)) var(--ln); font:500 clamp(calc(13.5*var(--u)),calc(.94*var(--c)),calc(15.5*var(--u)))/1.2 var(--sans); white-space:nowrap; transition:box-shadow .3s,color .3s,background-color .3s }
+.vf-off span{ position:relative; isolation:isolate; overflow:hidden; display:block; padding:calc(12.5*var(--u)) clamp(calc(11*var(--u)),calc(calc(2.6*var(--c)) - calc(26.5*var(--u))),calc(18*var(--u))); border-radius:calc(999*var(--u)); box-shadow:inset 0 0 0 calc(1.5*var(--u)) var(--ln); font:500 clamp(calc(13.5*var(--u)),calc(.94*var(--c)),calc(15.5*var(--u)))/1.2 var(--sans); white-space:nowrap; transition:box-shadow .3s}
 .vf-off span::before{ content:""; position:absolute; inset:0; z-index:-1; background:rgba(255,255,255,.36); transform:translateY(102%); transition:transform .5s var(--ease) }
 .vf-off label:hover span{ box-shadow:inset 0 0 0 calc(1.5*var(--u)) var(--ink) }
 .vf-off label:hover span::before{ transform:none }
@@ -1198,7 +1198,7 @@ body{ margin:0; background:#fff }
 .ti-stars svg{ width:calc(16*var(--u)); height:calc(16*var(--u)) }
 .rv-count{ font-size:calc(15*var(--u)); color:var(--mut) }
 .rv-nav{ margin-left:auto; display:flex; gap:calc(8*var(--u)) }
-.rv-nav button{ width:calc(44*var(--u)); height:calc(44*var(--u)); padding:0; border:0; border-radius:50%; background:none; box-shadow:inset 0 0 0 calc(1.5*var(--u)) var(--ink); color:var(--ink); display:grid; place-items:center; cursor:pointer; transition:background-color .4s,color .4s,opacity .3s }
+.rv-nav button{ width:calc(44*var(--u)); height:calc(44*var(--u)); padding:0; border:0; border-radius:50%; background:none; box-shadow:inset 0 0 0 calc(1.5*var(--u)) var(--ink); color:var(--ink); display:grid; place-items:center; cursor:pointer; transition:opacity .3s }
 .rv-nav svg{ width:calc(16*var(--u)); height:calc(16*var(--u)); transition:transform .4s var(--ease) }
 .rv-nav .ti-prev svg{ transform:scaleX(-1) }
 .rv-nav button:not(:disabled):hover{ background:var(--ink); color:#fff }
