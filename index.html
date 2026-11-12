@@ -449,10 +449,10 @@ body{ margin:0; background:#fff }
 .dr-hits dd{ margin-top:calc(3*var(--u)); font:italic 500 clamp(calc(20*var(--u)),calc(1.52*var(--c)),calc(24.5*var(--u)))/1.15 var(--serif); transition:color .3s }
 .dr-hits:hover dd{ color:var(--pine-d) }
 .dr-ticks{ display:flex; align-items:center; gap:calc(5*var(--u)); margin:calc(-4*var(--u)) calc(-6*var(--u)) 0 0; padding:calc(12*var(--u)) calc(6*var(--u)); border:0; background:none; cursor:pointer }
-/* four short rounded dashes (8 px, almost dots), one per answer: the current one takes the colour whole, softly, in step with the answer.
+/* four short rounded dashes (8 px, almost dots), one per answer: the current one stretches to 20 px and takes the colour whole, softly, in step with the answer.
    The pace lives in an invisible ::after animation on the current dash — its end turns to the next answer (no visible fill, owner 12.11.2026) */
-.dr-ticks i{ display:block; flex:none; width:calc(8*var(--u)); height:calc(3*var(--u)); border-radius:calc(3*var(--u)); background:var(--rule); transition:background-color .9s ease-in-out }
-.dr-ticks i.cur{ background:var(--pine-d) }
+.dr-ticks i{ display:block; flex:none; width:calc(8*var(--u)); height:calc(3*var(--u)); border-radius:calc(3*var(--u)); background:var(--rule); transition:width .9s ease-in-out,background-color .9s ease-in-out }
+.dr-ticks i.cur{ width:calc(20*var(--u)); background:var(--pine-d) }
 .dr-hits:hover .dr-ticks i:not(.cur){ background:#C7D0C2 }
 .dr-ticks i::after{ content:""; display:block }
 .m .dr-row.live .dr.on .dr-ticks i.cur::after{ animation:dr-fill 4.8s linear both }
