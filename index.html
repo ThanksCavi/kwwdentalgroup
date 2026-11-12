@@ -432,7 +432,7 @@ body{ margin:0; background:#fff }
 .dr-facts li{ position:relative; padding-left:calc(16*var(--u)) }
 .dr-facts li+li{ margin-top:calc(2*var(--u)) }
 .dr-facts li::before{ content:""; position:absolute; left:0; top:.74em; width:calc(7*var(--u)); height:calc(1*var(--u)); background:var(--pine) }
-/* quick hits: one answer at a time; the ticks are the progress and the way to the next one */
+/* quick hits: one answer at a time; the ticks show which answer and are the way to the next one */
 .dr-hits{ position:relative; display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:start; gap:0 calc(14*var(--u)); margin-top:clamp(calc(16*var(--u)),calc(1.5*var(--c)),calc(24*var(--u))); padding-top:clamp(calc(14*var(--u)),calc(1.3*var(--c)),calc(20*var(--u))); cursor:pointer; -webkit-tap-highlight-color:transparent }
 .dr-facts::before,.dr-hits::before{ content:""; position:absolute; left:0; right:0; top:0; height:calc(1*var(--u)); background:var(--rule) }
 /* the rules used to draw themselves from the left as the profile opens — switched off for now (owner undecided, 12.11.2026); uncomment the three lines to bring it back
@@ -447,15 +447,15 @@ body{ margin:0; background:#fff }
 .dr-hits dd{ margin-top:calc(3*var(--u)); font:italic 500 clamp(calc(20*var(--u)),calc(1.52*var(--c)),calc(24.5*var(--u)))/1.15 var(--serif); transition:color .3s }
 .dr-hits:hover dd{ color:var(--pine-d) }
 .dr-ticks{ display:flex; align-items:center; gap:calc(6*var(--u)); margin:calc(-4*var(--u)) calc(-6*var(--u)) 0 0; padding:calc(12*var(--u)) calc(6*var(--u)); border:0; background:none; cursor:pointer }
-/* four short rounded dashes, one per answer: the current one stretches and fills, the rest wait as quiet stubs */
-.dr-ticks i{ display:block; flex:none; position:relative; width:calc(12*var(--u)); height:calc(3*var(--u)); border-radius:calc(3*var(--u)); overflow:hidden; background:var(--rule); transition:width .7s var(--ease),background-color .3s }
-.dr-ticks i.cur{ width:calc(30*var(--u)) }
+/* four short rounded dashes, one per answer: the current one stretches and takes the colour whole, softly; the rest wait as quiet stubs.
+   The pace lives in an invisible ::after animation — its end turns to the next answer (no visible fill, owner 12.11.2026) */
+.dr-ticks i{ display:block; flex:none; width:calc(12*var(--u)); height:calc(3*var(--u)); border-radius:calc(3*var(--u)); background:var(--rule); transition:width .7s var(--ease),background-color .6s ease }
+.dr-ticks i.cur{ width:calc(30*var(--u)); background:var(--pine-d) }
 .dr-hits:hover .dr-ticks i:not(.cur){ background:#C7D0C2 }
-.dr-ticks i::after{ content:""; position:absolute; inset:0; border-radius:inherit; background:var(--pine-d); transform:translateX(-101%) }
-.dr-ticks i.cur::after{ transform:none }
+.dr-ticks i::after{ content:""; display:block }
 .m .dr-row.live .dr.on .dr-ticks i.cur::after{ animation:dr-fill 4.8s linear both }
 .m .dr-hits:hover .dr-ticks i.cur::after,.m .dr-hits:focus-within .dr-ticks i.cur::after{ animation-play-state:paused }
-@keyframes dr-fill{ from{ transform:translateX(-101%) } to{ transform:none } }
+@keyframes dr-fill{ from{ opacity:0 } to{ opacity:0 } }
 /* the story arrives line by line once the panel is on its way, and leaves at once */
 .dr-s{ opacity:0; transform:translateY(calc(20*var(--u))); transition:opacity .22s,transform 0s .22s }
 .dr.on .dr-s{ opacity:1; transform:none; transition:opacity .75s calc(.36s + var(--k)*.075s),transform 1s var(--ease) calc(.36s + var(--k)*.075s) }
