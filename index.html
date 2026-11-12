@@ -122,7 +122,7 @@ body{ margin:0; background:#fff }
 .call:hover .wv+.wv,.call.open .wv+.wv{ transition-delay:.24s }
 @keyframes ring{ 0%,100%{ transform:none } 18%{ transform:rotate(-15deg) } 38%{ transform:rotate(11deg) } 58%{ transform:rotate(-7deg) } 78%{ transform:rotate(4deg) } }
 .call-pop{ position:absolute; top:calc(100% + calc(16*var(--u))); left:calc(-10*var(--u)); width:calc(380*var(--u)); padding:calc(8*var(--u)); border-radius:calc(26*var(--u)); background:#fff; color:var(--ink);
-  box-shadow:0 0 0 calc(1*var(--u)) rgba(44,53,48,.06),0 calc(2*var(--u)) calc(8*var(--u)) rgba(72,92,64,.05),0 calc(22*var(--u)) calc(48*var(--u)) calc(-20*var(--u)) rgba(72,92,64,.2); visibility:hidden; opacity:0; transform:translateY(calc(-10*var(--u)));
+  box-shadow:0 calc(1*var(--u)) calc(3*var(--u)) rgba(44,53,48,.05),0 calc(18*var(--u)) calc(40*var(--u)) calc(-22*var(--u)) rgba(44,53,48,.2); visibility:hidden; opacity:0; transform:translateY(calc(-10*var(--u)));
   transition:opacity .22s,transform .3s var(--ease),visibility 0s .3s }
 .call-pop::before{ content:""; position:absolute; left:0; right:0; top:calc(-16*var(--u)); height:calc(16*var(--u)) }
 .call.open .call-pop{ visibility:visible; opacity:1; transform:none; transition:opacity .3s,transform .6s var(--ease) }
