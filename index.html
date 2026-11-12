@@ -326,9 +326,9 @@ body{ margin:0; background:#fff }
 .wel-pic .glass img{ width:110%; max-width:none; margin-left:-5%; height:110%; object-fit:cover; transform:translateY(calc(var(--p)*-8%)); filter:saturate(.88) contrast(1.02) }
 .wel-pic .glass::before,.wel-pic .glass::after{ content:""; position:absolute; pointer-events:none }
 .wel-pic .glass::before{ inset:0; mix-blend-mode:soft-light; background:radial-gradient(125% 105% at 50% 44%,rgba(85,112,75,0) 58%,rgba(44,53,48,.34)),linear-gradient(rgba(156,187,142,.3),rgba(120,150,109,.26)) }
-.wel-pic .glass::after{ inset:0 -30%; mix-blend-mode:screen; background:linear-gradient(112deg,rgba(255,255,255,0) 36%,rgba(255,255,255,.17) 50%,rgba(255,255,255,0) 64%); transform:translateX(-75%) }
+.wel-pic .glass::after{ inset:0 -30%; mix-blend-mode:screen; background:linear-gradient(112deg,rgba(255,255,255,0) 26%,rgba(255,255,255,.17) 50%,rgba(255,255,255,0) 74%); transform:translateX(-75%) }
 /* the reflection crosses the glass once: a moment after the photo has opened and is in full view. It is not tied to scrolling and never repeats. */
-.m .wel-pic .frame.glint .glass::after{ animation:glint 1.7s cubic-bezier(.45,0,.2,1) 1.1s both }
+.m .wel-pic .frame.glint .glass::after{ animation:glint 3s cubic-bezier(.37,0,.63,1) 2.2s both }
 @keyframes glint{ from{ transform:translateX(-75%) } to{ transform:translateX(75%) } }
 .m .wel-pic .glass{ opacity:0; transition:opacity .5s ease }
 .m .wel-pic .frame.in .glass{ opacity:1 }
